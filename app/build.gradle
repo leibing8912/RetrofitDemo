@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.ym.retrofitdemo"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 5100
+        versionName "5.1.0"
+        buildConfigField "String", "API_VERION", "\"5.1\""
+    }
+    buildTypes {
+        buildTypes {
+            debug {
+                //buildConfigField("String", "API_URL", "\"http://app-api106.t.hq.in.ecpark.cn/\"")
+                buildConfigField("String", "API_URL", "\"http://app-api.t.hq.in.ecpark.cn/\"")
+                //buildConfigField("String", "API_URL", "\"http://app-api.iauto360.cn/\"")
+                buildConfigField("boolean", "ISRELEASE", "false")
+            }
+            beta {
+                buildConfigField("String", "API_URL", "\"http://app-api.t.hq.in.ecpark.cn/\"")
+                buildConfigField("boolean", "ISRELEASE", "false")
+            }
+            release {
+                // 是否进行混淆打包
+                minifyEnabled false
+                shrinkResources false
+                // 混淆文件的位置
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                buildConfigField("String", "API_URL", "\"http://app-api.iauto360.cn/\"")
+                buildConfigField("boolean", "ISRELEASE", "true")
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.0.0-alpha2'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+}
